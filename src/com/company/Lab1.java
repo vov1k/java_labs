@@ -12,7 +12,7 @@ public class Lab1 {
         char[] ary = this.str_in.toCharArray();
         char ch;
         for(int i = 0; i < ary.length; i++) {
-            if(i == 0 || i%2 == 0) {
+            if(i == 0 || i%2 == 0) { //test commit
                 if (i == ary.length - 1) {
                     break;
                 }
