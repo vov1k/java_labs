@@ -14,7 +14,7 @@ public class Lab3 {
     private int key_Y;
 
     public Lab3() {
-        int size = 40;
+        int size = 80;
         Random rnd = new Random();
         //выбираем случайные простые числа, с помощью волшебной функции в java
         x = BigInteger.probablePrime(size / 2, rnd);
@@ -35,6 +35,7 @@ public class Lab3 {
 
     public String encrypt(String input_str) {
         key_X = a.modPow(y,n).intValue();
+        System.out.println("key for encode "+key_X);
         String out_string = "";
         for (int i=0;i<input_str.length();i++) {
             int new_code = (int)input_str.charAt(i);
@@ -44,9 +45,9 @@ public class Lab3 {
         return out_string;
     }
 
+    //Использую метод ньютона для поиcка корня n степени
     public int SqRtN(BigInteger digit, int n)
     {
-        //Использую метод ньютона для посика корня n степени
         // x(k+1) = 1/n * ((n-1)*x(k) + A/x(k)^(n-1));
         int m = n-1;
         BigInteger x1 = new BigInteger("1");
@@ -65,13 +66,12 @@ public class Lab3 {
 
     public String decrypt(String input_str) {
         key_Y = b.modPow(x,n).intValue();
+        System.out.println("key for decode "+key_Y);
         String[] str_arr = input_str.split("O");
         String output_string = "";
-        System.out.println("key_Y="+key_Y);
         for(String str: str_arr) {
             BigInteger big = new BigInteger(str);
             int int_code = SqRtN(big, key_Y);
-            System.out.println(int_code);
             output_string += (char)int_code;
         }
         return output_string;
