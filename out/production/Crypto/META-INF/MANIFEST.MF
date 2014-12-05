@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: home/vov1k/IdeaProjects/Crypto/out//home/vov1k/IdeaProject
+ s/Crypto/out/production//home/vov1k/IdeaProjects/Crypto/out/productio
+ n/Crypto//home/vov1k/IdeaProjects/Crypto/out/production/Crypto/com//h
+ ome/vov1k/IdeaProjects/Crypto/out/production/Crypto/com/company/
+Main-Class: com.company.Main
+
