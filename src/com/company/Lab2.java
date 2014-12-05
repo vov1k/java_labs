@@ -1,18 +1,8 @@
 package com.company;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.BASE64DecoderStream;
-import sun.misc.BASE64Decoder;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Random;
-
-import static java.lang.StrictMath.abs;
 
 public class Lab2 {
     private BigInteger p; //simple number
@@ -71,7 +61,7 @@ public class Lab2 {
         System.out.println("Private key: " + d);
     }
 
-    public String encrypt(String input_str) throws UnsupportedEncodingException {
+    public String encrypt(String input_str) {
         ArrayList<Integer> chars = new ArrayList<Integer>();
         for (int i=0;i<input_str.length();i++) {
             chars.add((int)input_str.charAt(i));
@@ -107,7 +97,7 @@ public class Lab2 {
         return output_str;
     }
 
-    public String decrypt(String input_str) throws IOException {
+    public String decrypt(String input_str) {
 
         String[] str_arr = input_str.split("O");
         String output_string = "";
