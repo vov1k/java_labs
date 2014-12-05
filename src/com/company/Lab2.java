@@ -1,7 +1,18 @@
 package com.company;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.BASE64DecoderStream;
+import sun.misc.BASE64Decoder;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
+
+import static java.lang.StrictMath.abs;
 
 public class Lab2 {
     private BigInteger p; //simple number
@@ -50,7 +61,7 @@ public class Lab2 {
 
         //Ищем такое d, при котором будет верно выражение e*d % (p-1)*(q-1) = 1
         //В java для этого уже есть чудесная функция
-        BigInteger d = e.modInverse(m);
+        this.d = e.modInverse(m);
 
         System.out.println("p: " + p);
         System.out.println("q: " + q);
@@ -60,29 +71,65 @@ public class Lab2 {
         System.out.println("Private key: " + d);
     }
 
-    public String encrypt(String input_str) {
-        byte[] input_chars = input_str.getBytes();
-        String output_str = "";
-        for(int i=0; i<input_chars.length; i++) {
-            BigInteger ch = BigInteger.valueOf((int)input_chars[i]);
-            BigInteger encode_ch = ch.modPow(e, n);
-            System.out.println("encode = "+encode_ch);
+    public String encrypt(String input_str) throws UnsupportedEncodingException {
+        ArrayList<Integer> chars = new ArrayList<Integer>();
+        for (int i=0;i<input_str.length();i++) {
+            chars.add((int)input_str.charAt(i));
         }
-        System.out.println("encode str = : " + output_str);
+        ArrayList<String> blocks = new ArrayList<String>();
+        String str = "";
+        String output_str = "";
+        for (int i = 0; i < chars.size(); i++) {
+            String short_str = chars.get(i).toString();
+            while(short_str.length() < 4) {
+                short_str = "0"+short_str;
+            }
+            str += short_str;
+
+            if (i == chars.size() - 1 && (i+1)%4 != 0) {
+                long data = Long.parseLong(str);
+                BigInteger ch = BigInteger.valueOf(data);
+                BigInteger encode_block = ch.modPow(d, n);
+                blocks.add(encode_block.toString());
+                break;
+            }
+            if ((i+1)%4 == 0) {
+                long data = Long.parseLong(str);
+                BigInteger ch = BigInteger.valueOf(data);
+                BigInteger encode_block = ch.modPow(d, n);
+                blocks.add(encode_block.toString());
+                str = "";
+            }
+        }
+        for(String block: blocks) {
+            output_str += block+"O";
+        }
         return output_str;
     }
 
-    public String decrypt(String input_str) {
-        byte[] input_chars = input_str.getBytes();
-        String output_str = "";
-        for(int i=0; i<input_chars.length; i++) {
-            BigInteger ch = BigInteger.valueOf((int)input_chars[i]);
-            BigInteger encode_ch = ch.modPow(d, n);
-            System.out.println("encode = "+encode_ch);
-            output_str += Character.toString((char)encode_ch.intValue());
+    public String decrypt(String input_str) throws IOException {
+
+        String[] str_arr = input_str.split("O");
+        String output_string = "";
+        for (int i=0; i<str_arr.length; i++) {
+            BigInteger dig_block = new BigInteger(str_arr[i]);
+            BigInteger decode_ch = dig_block.modPow(e, n);
+            str_arr[i] = decode_ch.toString();
         }
-        System.out.println("encode str = : " + output_str);
-        return output_str;
+        for(String block_decode: str_arr) {
+            while(block_decode.length()%4 != 0) {
+                block_decode = "0"+block_decode;
+            }
+            String temp_str = "";
+            for(int i=0; i<block_decode.length(); i++) {
+                temp_str += block_decode.charAt(i);
+                if ((i+1)%4 == 0) {
+                    output_string += (char)Integer.parseInt(temp_str);
+                    temp_str = "";
+                }
+            }
+        }
+        return output_string;
     }
 
  }
