@@ -52,13 +52,13 @@ public class Lab2 {
         //Ищем такое d, при котором будет верно выражение e*d % (p-1)*(q-1) = 1
         //В java для этого уже есть чудесная функция
         this.d = e.modInverse(m);
-
+/*
         System.out.println("p: " + p);
         System.out.println("q: " + q);
         System.out.println("m: " + m);
         System.out.println("n: " + n);
         System.out.println("Public key: " + e);
-        System.out.println("Private key: " + d);
+        System.out.println("Private key: " + d);*/
     }
 
     public String encrypt(String input_str) {

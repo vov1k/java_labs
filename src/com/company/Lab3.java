@@ -21,16 +21,12 @@ public class Lab3 {
         y = this.x.nextProbablePrime();
         q = BigInteger.valueOf(17);
         n = BigInteger.valueOf(23);
-        System.out.println("x: " + x);
-        System.out.println("y: " + y);
-        System.out.println("n: " + n);
-        System.out.println("q: " + q);
     }
 
     public void write_A_B() {
         this.a = q.modPow(x, n);
         this.b = q.modPow(y, n);
-        System.out.println("A="+this.a.toString()+" B="+this.b.toString());
+      //  System.out.println("A="+this.a.toString()+" B="+this.b.toString());
     }
 
     public String encrypt(String input_str) {
