@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    /*    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Lab1 lab1 = new Lab1();
         Lab2 lab2 = new Lab2(); lab2.generateNumbers();
         Lab3 lab3 = new Lab3(); lab3.write_A_B();
@@ -33,10 +33,14 @@ public class Main {
                 String[] arr_command = command.split(" ");
                 String result = "";
 
-                if (arr_command[0].equals("exit"))
+                if (arr_command[0].equals("exit")) {
+                    System.out.println("Buy ...");
                     break;
-                if (arr_command[0].equals("help"))
+                }
+                if (arr_command[0].equals("help")) {
+                    System.out.println(help_text);
                     continue;
+                }
 
                 String in_str = "";
                 for(int i=2; i<arr_command.length; i++) {
@@ -73,10 +77,6 @@ public class Main {
                         break;
                     case '5' :
                         break;
-                    case '6' :
-                        break;
-                    case '7' :
-                        break;
                 }
                 System.out.println(result);
 
@@ -84,6 +84,13 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Ошибка. Неверная команда. "+e.toString());
             }
-        }
+        }*/
+
+
+        Lab4 l4 = new Lab4();
+        String code = l4.encrypt("разный текст");
+        System.out.println(code);
+        code = l4.decrypt(code);
+        System.out.println(code);
     }
 }
