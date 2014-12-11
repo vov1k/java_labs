@@ -3,13 +3,13 @@ package com.company;
 import java.io.UnsupportedEncodingException;
 
 public class Lab4 {
-    private static int blockSize = 1; //кол-во бит / 8
+    private static int blockSize = 2; //кол-во бит / 8
     private static String key_code = "qw"; //ключ шифрования
 
     public static byte[][] getByteBlocks(String text) throws UnsupportedEncodingException {
 
     /* Весь текст в байтах */
-        byte[] textBytes = text.getBytes("UTF-8");
+        byte[] textBytes = text.getBytes();
 
     /* Если текст слишком маленький для блока */
         if(blockSize > textBytes.length) {
@@ -40,49 +40,34 @@ public class Lab4 {
         return finalArray;
     }
 
-    public String encrypt(String in_str) throws UnsupportedEncodingException {
-        byte[][] byte_array = this.getByteBlocks(in_str);
+    public byte[] encrypt(String in_str) throws UnsupportedEncodingException {
+        byte[] byte_array = in_str.getBytes();
 
-        byte[] key = key_code.getBytes("UTF-8");
-        int[][] res = new int[byte_array.length][blockSize];
+        byte[] key = key_code.getBytes();
 
         for (int i=0;i<byte_array.length;i++) {
-            for(int j=0; j<byte_array[i].length; j++) {
-                res[i][j] = byte_array[i][j]^key[j];
-                System.out.print(byte_array[i][j]+" ");
-            }
+            byte_array[i] = (byte)((byte_array[i]^key[i % key.length]));
+                System.out.print(byte_array[i]+" ");
         }
 
-        String result = "";
-        for (int i=0;i<res.length;i++) {
-            for(int j=0; j<res[i].length; j++) {
-                result += (char)((byte)res[i][j]);
-            }
-        }
-
-        return result;
+        return byte_array;
     }
 
-    public String decrypt(String in_str) throws UnsupportedEncodingException {
-        byte[][] byte_array = this.getByteBlocks(in_str);
+    public byte[] decrypt(byte[] byte_array) throws UnsupportedEncodingException {
+      //  char[] char_array = in_str.toCharArray();
+     //   byte[] byte_array = new byte[char_array.length];
+        for (int i=0; i<byte_array.length;i++) {
+            byte_array[i]  = (byte)(int)byte_array[i];
+        }
 
-        byte[] key = key_code.getBytes("UTF-8");
-        int[][] res = new int[byte_array.length][blockSize];
+        byte[] key = key_code.getBytes();
 
         for (int i=0;i<byte_array.length;i++) {
-            for(int j=0; j<byte_array[i].length; j++) {
-                res[i][j] = byte_array[i][j]^key[j];
-            }
+            byte_array[i] = (byte)((byte_array[i]^key[i % key.length]));
+            System.out.print(byte_array[i]+" ");
         }
 
-        String result = "";
-        for (int i=0;i<res.length;i++) {
-            for(int j=0; j<res[i].length; j++) {
-                result += (char)((byte)res[i][j]);
-            }
-        }
-
-        return result;
+        return byte_array;
     }
 
 }

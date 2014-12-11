@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    /*    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Lab1 lab1 = new Lab1();
         Lab2 lab2 = new Lab2(); lab2.generateNumbers();
         Lab3 lab3 = new Lab3(); lab3.write_A_B();
@@ -55,7 +55,7 @@ public class Main {
                         else if (arr_command[1].equals("decode"))
                             result = lab1.decrypt(in_str);
                         else
-                            System.out.println("Ошибка. неверная команда "+arr_command[0]+" "+arr_command[1]+" "+arr_command[2]);
+                            System.out.println("Ошибка. неверная команда "+command);
                         break;
                     case '2' :
                         if(arr_command[1].equals("encode"))
@@ -63,7 +63,7 @@ public class Main {
                         else if (arr_command[1].equals("decode"))
                             result = lab2.decrypt(in_str);
                         else
-                            System.out.println("Ошибка. неверная команда "+arr_command[0]+arr_command[1]+arr_command[2]);
+                            System.out.println("Ошибка. неверная команда "+command);
                         break;
                     case '3' :
                         if(arr_command[1].equals("encode"))
@@ -71,7 +71,7 @@ public class Main {
                         else if (arr_command[1].equals("decode"))
                             result = lab3.decrypt(in_str);
                         else
-                            System.out.println("Ошибка. неверная команда "+arr_command[0]+" "+arr_command[1]+" "+arr_command[2]);
+                            System.out.println("Ошибка. неверная команда "+command);
                         break;
                     case '4' :
                         break;
@@ -84,13 +84,7 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Ошибка. Неверная команда. "+e.toString());
             }
-        }*/
+        }
 
-
-        Lab4 l4 = new Lab4();
-        String code = l4.encrypt("разный текст");
-        System.out.println(code);
-        code = l4.decrypt(code);
-        System.out.println(code);
     }
 }

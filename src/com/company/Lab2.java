@@ -62,6 +62,13 @@ public class Lab2 {
     }
 
     public String encrypt(String input_str) {
+        System.out.println("p: " + p);
+        System.out.println("q: " + q);
+        System.out.println("m: " + m);
+        System.out.println("n: " + n);
+        System.out.println("Public key: " + e);
+        System.out.println("Private key: " + d);
+        System.out.println("----------------------------------");
         ArrayList<Integer> chars = new ArrayList<Integer>();
         for (int i=0;i<input_str.length();i++) {
             chars.add((int)input_str.charAt(i));
