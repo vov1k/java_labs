@@ -17,6 +17,7 @@ public class Main {
         Lab2 lab2 = new Lab2(); lab2.generateNumbers();
         Lab3 lab3 = new Lab3(); lab3.write_A_B();
         Lab4 lab4 = new Lab4();
+        Lab5 lab5 = new Lab5();
 
 
         String help_text = "Справка по использованию:\n";
@@ -83,6 +84,12 @@ public class Main {
                             System.out.println("Ошибка. неверная команда "+command);
                         break;
                     case '5' :
+                        if(arr_command[1].equals("encode"))
+                            result = lab5.encrypt(in_str);
+                        else if (arr_command[1].equals("decode"))
+                            result = lab5.encrypt(in_str);
+                        else
+                            System.out.println("Ошибка. неверная команда "+command);
                         break;
                 }
                 System.out.println(result);
