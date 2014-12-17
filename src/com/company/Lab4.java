@@ -40,34 +40,30 @@ public class Lab4 {
         return finalArray;
     }
 
-    public byte[] encrypt(String in_str) throws UnsupportedEncodingException {
+    public String encrypt(String in_str) throws UnsupportedEncodingException {
         byte[] byte_array = in_str.getBytes();
-
+        String result = "";
         byte[] key = key_code.getBytes();
 
         for (int i=0;i<byte_array.length;i++) {
             byte_array[i] = (byte)((byte_array[i]^key[i % key.length]));
-                System.out.print(byte_array[i]+" ");
+            result += byte_array[i]+"O";
         }
 
-        return byte_array;
+        return result;
     }
 
-    public byte[] decrypt(byte[] byte_array) throws UnsupportedEncodingException {
-      //  char[] char_array = in_str.toCharArray();
-     //   byte[] byte_array = new byte[char_array.length];
-        for (int i=0; i<byte_array.length;i++) {
-            byte_array[i]  = (byte)(int)byte_array[i];
-        }
-
+    public String decrypt(String in_str) throws UnsupportedEncodingException {
+        String[] arr_in = in_str.split("O");
         byte[] key = key_code.getBytes();
-
-        for (int i=0;i<byte_array.length;i++) {
-            byte_array[i] = (byte)((byte_array[i]^key[i % key.length]));
-            System.out.print(byte_array[i]+" ");
+        byte[] byte_in = new byte[arr_in.length];
+        for(int i=0; i<arr_in.length; i++) {
+            byte b = Byte.parseByte(arr_in[i]);
+            byte_in[i] = (byte)((b^key[i % key.length]));
         }
+        String result = new String(byte_in);
 
-        return byte_array;
+        return result;
     }
 
 }
