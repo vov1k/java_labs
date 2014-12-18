@@ -87,7 +87,7 @@ public class Main {
                         if(arr_command[1].equals("encode"))
                             result = lab5.encrypt(in_str);
                         else if (arr_command[1].equals("decode"))
-                            result = lab5.encrypt(in_str);
+                            result = lab5.decrypt(in_str);
                         else
                             System.out.println("Ошибка. неверная команда "+command);
                         break;
